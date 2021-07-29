@@ -14,6 +14,7 @@ const taskList = new TaskList('task-list', tasksArray);
 
 /* Start function */
 const main = () => {
+
 }
 
 // Initialize script
