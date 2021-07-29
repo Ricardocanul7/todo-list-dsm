@@ -116,7 +116,6 @@ body {
     background-color: #fff;
 }
 
-
 .wrapper{
 
     display: grid;
@@ -131,6 +130,18 @@ i:active{
 
     color: #90CDFD;
 
+}
+
+.footer {
+    background-color: #1b1b1b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 /*inica el responsivo*/
@@ -158,5 +169,4 @@ i:active{
         width: 100%;
        
     }
-   
 }
