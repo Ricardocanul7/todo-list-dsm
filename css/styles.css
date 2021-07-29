@@ -20,14 +20,73 @@ body {
     top: 0;
 }
 
-.footer {
-    background-color: #1b1b1b;
-    color: #fff;
+
+.header div{
+
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    position: absolute;
-    bottom: 0;
+    border:solid 2px #D8D8D8;
+    height: 45px;
+    padding:0 20px;
+    border-radius: 20px;
+    background-color: #Ffffff;
+}
+
+.header div:focus-within{
+    border-color: #90CDFD;
+    box-shadow: 0 0 0 0.1rem RGBA(207,234,255,1);
+}
+
+.header input{
+
+    background-color:transparent;
+    outline: none;
+    border-style: none;
+    
+    
+}
+.header button{
+    background-color:transparent;
+    outline: none;
+    border-style: none;
+    cursor: pointer;
+}
+
+
+.table{
+    width: 300px;
+    height: 400px;
+  
+    display: grid;
+    grid-template-rows: 30px 1fr;
+    box-shadow: rgba(0,0,0,0.1)0 0 10px;
+}
+
+
+.table-title{
+    
+    background-color: #90CDFD;
+    box-shadow: rgba(0,0,0,0.1)0 0 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.table-body{
+
+    overflow-y: auto;
+}
+.table-body div{
+    height: 30px;
     width: 100%;
+    border-bottom: solid 2px #EEE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.table-body div:nth-child(even) {
+    background-color: #F8F9F8;
+}
+
+.table-body div:nth-child(odd) {
+    background-color: #fff;
 }
