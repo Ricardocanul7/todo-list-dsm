@@ -90,3 +90,15 @@ body {
 .table-body div:nth-child(odd) {
     background-color: #fff;
 }
+
+.footer {
+    background-color: #1b1b1b;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
