@@ -51,6 +51,9 @@ body {
     cursor: pointer;
 }
 
+.validate{
+    border: red 1px solid !important;
+}
 
 .table{
     width: 300px;
