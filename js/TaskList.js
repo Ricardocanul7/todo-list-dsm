@@ -15,7 +15,7 @@ class TaskList {
         let rawTextNodes = '';
 
         this.items.forEach(element => {
-            rawTextNodes += `<div id=${element.id} >${element.name} - ${element.date}</div>`;
+            rawTextNodes += `<div>${element.name} - ${element.date}</div>`;
         });
 
         listElement.innerHTML = rawTextNodes;

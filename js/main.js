@@ -5,9 +5,10 @@ const taskList = new TaskList('task-list', []);
 
 const addTask = () => {
     let inputElement = document.getElementById('task-name');
-    let name = inputElement.value;
+    let element = inputElement.value;
 
-    if (name !== '') {
+    if (element !== '') {
+        let name = element.replace(/</g, '&lt;').replace(/>/g, '&gt;')
         let task = new Task(null, name, null);
         taskList.add(task);
         inputElement.value = "";
