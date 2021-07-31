@@ -32,6 +32,7 @@ const main = () => {
             addTask();
         }
     });
+
 }
 
 // Initialize script
