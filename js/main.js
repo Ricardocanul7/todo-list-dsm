@@ -13,44 +13,45 @@ const addTask = () => {
     taskList.add(task); //manda como parametro al metodo add el nombre de la tarea
     inputElement.value = "";
     inputElement.placeholder = "Task Name";
-    inputElement.parentElement.classList.remove("validate");
+    inputElement.parentElement.classList.remove("valvalueate");
   } else {
-    inputElement.parentElement.classList.add("validate");
+    inputElement.parentElement.classList.add("valvalueate");
     inputElement.placeholder = "Not empty";
   }
 };
 
 const Edit = (parametro) => {
-  // console.log("el parametro es " + parametro);
+  
   const Indice = parametro - 1;
 
   const btnEdit = document.querySelectorAll(".btn-edit")[Indice]; //botn de edicion
   const btnSave = document.querySelectorAll(".btn-save")[Indice]; //btnSave de guardado
   const inputEdit = document.querySelectorAll(".input-invisible")[Indice]; //input de edicion
   const task = document.querySelectorAll(".nombre")[Indice];
+  const Date=document.querySelectorAll('.ml-3.mr-3')[Indice];
 
-  if (
-    btnEdit.id === btnSave.id &&
-    btnEdit.id === inputEdit.id &&
-    btnEdit.id === task.id
-  ) {
+  if (btnEdit) {
     btnEdit.classList.toggle("input-invisible");
     btnSave.classList.toggle("visible");
     inputEdit.classList.toggle("visible");
     task.classList.toggle("input-invisible");
   }
+  if(btnSave){
+    btnSave.addEventListener("click", () => {
+      if (btnEdit.style.display === "none") {
+        btnEdit.classList.toggle("input-invisible");
+        btnSave.classList.toggle("visible");
+        inputEdit.classList.toggle("visible");
+        task.classList.toggle("input-invisible");
+      }
+    });
+  }
 
-  btnSave.addEventListener("click", () => {
-    if (btnEdit.getElementsByClassName.display === "none") {
-      btnEdit.classList.toggle("input-invisible");
-      btnSave.classList.toggle("visible");
-      inputEdit.classList.toggle("visible");
-      task.classList.toggle("input-invisible");
-    }
-  });
-
+  if(inputEdit){
+    const object={id:parseFloat(parametro),name:inputEdit.value,date:Date.textContent.trim()};
   if (inputEdit.value !== "") {
-    taskList.edit(inputEdit.value, btnSave.id);
+    taskList.edit(parseFloat(parametro),object);
+  }
   }
 };
 
@@ -71,7 +72,7 @@ const main = () => {
     var btnSave = e.target.parentNode;
     // ...
     
-    Edit(btnSave.id);
+    Edit(parseFloat(btnSave.value));
   });
 };
 

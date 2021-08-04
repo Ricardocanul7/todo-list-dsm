@@ -19,13 +19,13 @@ class TaskList {
       rawTextNodes += `
             <div data-id="${element.id}" class="items">
             <input type='text' class='input-invisible' id="${element.id}"></input>
-                <p class='nombre' id="${element.id}" >${element.name}</p>
+                <p class='nombre' value="${element.id}" >${element.name}</p>
                 <small class="ml-3 mr-3">
                     ${element.date}
                 </small>
                
-                <button class="btn-edit" id="${element.id}"><i class="fas fa-edit"></i></button>
-                <button class="btn-save" id="${element.id}"><i class="fas fa-save"></i></button>
+                <button class="btn-edit" value="${element.id}"><i class="fas fa-edit"></i></button>
+                <button class="btn-save" value="${element.id}"><i class="fas fa-save"></i></button>
 
             </div>
             `;
@@ -60,14 +60,18 @@ class TaskList {
     this.update();
   }
 
-  edit(object_id, idBtn) {
-    /* code */
+  edit(object_id, task) {
+    
+   
+    this.items=this.items.map((item)=>{
 
-    const indice = idBtn - 1;
-    // console.log('indice es '+indice)
-    const neName = object_id;
-    this.items[indice].name = neName;
-    console.log(this.items);
+        if(item.id===object_id){
+            task.id=item.id;
+            return  task;
+        }
+        return item;
+    })
+   
     this.update();
   }
 
