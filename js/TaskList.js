@@ -1,22 +1,22 @@
 import Task from "./Task.js";
 class TaskList {
-  constructor(element_id, items) {
-    this.element_id = element_id;
-    /* items<Task> */
-    this.items = items;
-    this.autoincrementId = 1;
+    constructor(element_id, items) {
+        this.element_id = element_id;
+        /* items<Task> */
+        this.items = items;
+        this.autoincrementId = 1;
 
-    this.update();
-  }
+        this.update();
+    }
 
-  update() {
-    let listElement = document.getElementById(this.element_id);
+    update() {
+        let listElement = document.getElementById(this.element_id);
 
-    listElement.innerHTML = "";
-    let rawTextNodes = "";
+        listElement.innerHTML = "";
+        let rawTextNodes = "";
 
-    this.items.forEach((element) => {
-      rawTextNodes += `
+        this.items.forEach((element) => {
+            rawTextNodes += `
             <div data-id="${element.id}" class="items">
             <input type='text' class='input-invisible' id="${element.id}"></input>
                 <p class='nombre' value="${element.id}" >${element.name}</p>
@@ -29,54 +29,58 @@ class TaskList {
 
             </div>
             `;
-    });
+        });
 
-    listElement.innerHTML = rawTextNodes;
-  }
+        listElement.innerHTML = rawTextNodes;
+    }
 
-  //add recibe el nombre de la tarea como parametro
-  add(task) {
-    /* Metodo add se encarga unicamente de guardar datos */
-    let date = new Date();
-    let hour = ("0" + date.getHours()).slice(-2);
-    let minute = ("0" + date.getMinutes()).slice(-2);
-    let day = ("0" + date.getDate()).slice(-2);
-    let month = ("0" + (date.getMonth() + 1)).slice(-2);
-    let year = date.getFullYear();
+    //add recibe el nombre de la tarea como parametro
+    add(task) {
+        /* Metodo add se encarga unicamente de guardar datos */
+        let date = new Date();
+        let hour = ("0" + date.getHours()).slice(-2);
+        let minute = ("0" + date.getMinutes()).slice(-2);
+        let day = ("0" + date.getDate()).slice(-2);
+        let month = ("0" + (date.getMonth() + 1)).slice(-2);
+        let year = date.getFullYear();
 
-    //agrega al array los datos del constructor
-    this.items.push(
-      new Task(
-        this.autoincrementId,
-        task.name,
-        task.date === null
-          ? `${day}-${month}-${year}, ${hour}:${minute}`
-          : task.date
-      )
-    );
+        //agrega al array los datos del constructor
+        this.items.push(
+            new Task(
+                this.autoincrementId,
+                task.name,
+                task.date === null
+                    ? `${day}-${month}-${year}, ${hour}:${minute}`
+                    : task.date
+            )
+        );
 
-    this.autoincrementId++;
+        this.autoincrementId++;
 
-    this.update();
-  }
+        this.update();
+    }
 
-  edit(object_id, task) {
-    
-   
-    this.items=this.items.map((item)=>{
+    edit(object_id, task) {
 
-        if(item.id===object_id){
-            task.id=item.id;
-            return  task;
-        }
-        return item;
-    })
-   
-    this.update();
-  }
 
-  delete(object_id) {
-    /* code */
+        this.items = this.items.map((item) => {
+
+            if (item.id === object_id) {
+                task.id = item.id;
+                return task;
+            }
+            return item;
+        })
+
+        this.update();
+    }
+
+    delete(object_id) {
+        /* code */
+
+        this.update();
+    }
+
     search(nameEnter) {
         console.log('TaskList.js', nameEnter);
         const filtrado = this.items.filter(element => element.name.toLowerCase().indexOf(nameEnter) > -1);
