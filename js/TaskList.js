@@ -5,6 +5,7 @@ class TaskList {
         /* items<Task> */
         this.items = items;
         this.autoincrementId = 1;
+        this.name;
 
         this.update();
     }
@@ -61,6 +62,35 @@ class TaskList {
         this.update();
     }
 
+    search(nameEnter) {
+        console.log('TaskList.js', nameEnter);
+        const filtrado = this.items.filter(element => element.name.toLowerCase().indexOf(nameEnter) > -1);
+
+        if (filtrado !== null) {
+            let listElement = document.getElementById(this.element_id);
+            listElement.innerHTML = '';
+            let rawTextNodes = '';
+
+            if (filtrado.length === 0) {
+                rawTextNodes += 'No se encontró ningún resultado'
+            } else {
+                filtrado.forEach(element => {
+                    rawTextNodes += `
+                        <div data-id="${element.id}">
+                            ${element.name}
+                                <small class="ml-3">
+                                    ${element.date}
+                                </small>
+                        </div>`;
+                });
+            }
+
+            listElement.innerHTML = rawTextNodes;
+
+        } else {
+            this.update();
+        }
+    };
 }
 
 export default TaskList;
