@@ -147,6 +147,47 @@ i:active{
     width: 100%;
 }
 
+
+.btn-edit{
+    background-color: transparent;
+    outline: none;
+    border-style: none;
+    margin:1px;
+}
+.btn-save{
+    background-color: transparent;
+    outline: none;
+    border-style: none;
+    margin:1px;
+    display: none;
+}
+
+.input-invisible{
+
+     display: none; 
+   
+}
+
+.visible{
+    display: block; 
+    
+}
+
+.nombre{
+   margin: 0%;
+   padding: 0%;
+   font-weight: 700;
+}
+
+.items{
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+
 /*inica el responsivo*/
 
 @media only screen and (max-width: 600px) {
