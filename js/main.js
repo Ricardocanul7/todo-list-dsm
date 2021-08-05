@@ -55,19 +55,54 @@ const Edit = (parametro) => {
   }
 };
 
+const search = () => {
+    let element = document.getElementById('text-search');
+    let nameEnter = element.value.toLowerCase();
+    let getBtnBack = document.getElementById('btn-back');
+
+    if (nameEnter !== '') {
+        element.value = "";
+        element.placeholder = "Task Name";
+        element.parentElement.classList.remove('validate');
+        taskList.search(nameEnter)
+        console.log('main.js', nameEnter);
+        getBtnBack.innerHTML = '<i class="fas fa-arrow-left" style="margin-right: 10px;"></i>'
+
+    } else {
+        element.parentElement.classList.add('validate');
+        element.placeholder = "Not empty";
+    }
+}
+
 /* Start function */
 const main = () => {
-  /* Events */
-  document.getElementById("add-task").addEventListener("click", () => {
-    addTask();
-  });
+    /* Events */
+    document.getElementById('add-task').addEventListener('click', () => {
+        addTask();
+
+    });
 
   document.getElementById("task-name").addEventListener("keyup", () => {
     if (event.key === "Enter") {
       addTask();
     }
-  });
+   });
+  
+    document.getElementById('search-task').addEventListener('click', () => {
+        search()
+    })
 
+    document.getElementById('text-search').addEventListener('keyup', () => {
+        if (event.key === 'Enter') {
+            search();
+        }
+    });
+
+    document.getElementById('btn-back').addEventListener('click', () => {
+        taskList.update();
+        let getBtnBack = document.getElementById('btn-back');
+        getBtnBack.innerHTML = ''
+    })
   document.getElementById("task-list").addEventListener("click", (e) => {
     var btnSave = e.target.parentNode;
     // ...
