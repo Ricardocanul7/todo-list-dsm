@@ -98,12 +98,18 @@ class TaskList {
       } else {
         filtrado.forEach((element) => {
           rawTextNodes += `
-                        <div data-id="${element.id}">
-                            ${element.name}
-                                <small class="ml-3">
-                                    ${element.date}
-                                </small>
-                        </div>`;
+          <div data-id="${element.id}" >
+          <input type='text' class='form-control input-invisible' name="${element.id}"></input>
+              <p class='nombre' value="${element.id}" >${element.name}</p>
+              <small class="ml-3 mr-3" value="${element.id}">
+                  ${element.date}
+              </small>
+             
+              <button class="btn-edit" value="${element.id}" name="editar"><i class="fas fa-edit"></i></button>
+              <button class="btn-save" value="${element.id}" name="guardar"><i class="fas fa-save"></i></button>
+              <button class="btn btn-danger " value="${element.id}" name="eliminar"><i class="fas fa-trash-alt"></i></button>
+          </div>
+          `;
         });
       }
 
