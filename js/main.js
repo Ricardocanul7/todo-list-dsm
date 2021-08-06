@@ -22,14 +22,15 @@ const addTask = () => {
 
 const Edit = (parametro) => {
 
-  const Indice = parametro - 1;
+  const Indice=parametro-1;
 
-  const btnEdit = document.querySelectorAll(".btn-edit")[Indice]; //botn de edicion
-  const btnSave = document.querySelectorAll(".btn-save")[Indice]; //btnSave de guardado
-  const inputEdit = document.querySelectorAll(".input-invisible")[Indice]; //input de edicion
-  const task = document.querySelectorAll(".nombre")[Indice];
-  const Date = document.querySelectorAll('.ml-3.mr-3')[Indice];
-
+  const btnEdit = document.querySelector(`.btn-edit[value="${parametro}"]`); //botn de edicion
+  const btnSave = document.querySelector(`.btn-save[value="${parametro}"]`); //btnSave de guardado
+  const inputEdit = document.querySelector(`.input-invisible[name="${parametro}"]`); //input de edicion
+  const task = document.querySelector(`.nombre[value="${parametro}"]`);
+  const Date = document.querySelector(`.ml-3.mr-3[value="${parametro}"]`);
+ 
+  console.log(btnEdit)
   if (btnEdit) {
     btnEdit.classList.toggle("input-invisible");
     btnSave.classList.toggle("visible");
@@ -54,6 +55,13 @@ const Edit = (parametro) => {
     }
   }
 };
+
+const Delete =(parametro)=>{
+
+  console.log(parametro)
+  taskList.delete(parseFloat(parametro))
+
+}
 
 const search = () => {
   let element = document.getElementById('text-search');
@@ -103,12 +111,29 @@ const main = () => {
     let getBtnBack = document.getElementById('btn-back');
     getBtnBack.innerHTML = ''
   })
+
+  
   document.getElementById("task-list").addEventListener("click", (e) => {
     var btnSave = e.target.parentNode;
     // ...
 
-    Edit(parseFloat(btnSave.value));
+    if(btnSave.name==="editar"||btnSave.name==="guardar"){
+      console.log(btnSave.value)
+      Edit(parseFloat(btnSave.value));
+      
+    }
   });
+
+  document.getElementById("task-list").addEventListener("click", (e) => {
+    var btnDelete = e.target.parentNode;
+    // ...
+
+    if(btnDelete.name==="eliminar"){
+      Delete(parseFloat(btnDelete.value));
+    }
+  });
+
+ 
 };
 
 // Initialize script
