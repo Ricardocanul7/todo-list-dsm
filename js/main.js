@@ -28,7 +28,7 @@ const addTask = () => {
   }
 };
 
-const edit = (id) => {
+const editTask = (id) => {
   const btnEdit = document.querySelector(`.btn-edit[value="${id}"]`);
   const btnSave = document.querySelector(`.btn-save[value="${id}"]`);
   const inputEdit = document.querySelector(`.input-invisible[name="${id}"]`);
@@ -64,11 +64,11 @@ const edit = (id) => {
   }
 };
 
-const remove = (item_id) => {
+const removeTask = (item_id) => {
   taskList.delete(parseInt(item_id));
 }
 
-const search = () => {
+const searchTask = () => {
   let searchInput = document.getElementById('text-search');
   let getBtnBack = document.getElementById('btn-back');
 
@@ -99,12 +99,12 @@ const main = () => {
   });
 
   document.getElementById('search-task').addEventListener('click', () => {
-    search();
+    searchTask();
   })
 
   document.getElementById('text-search').addEventListener('keyup', () => {
     if (event.key === 'Enter') {
-      search();
+      searchTask();
     }
   });
 
@@ -122,10 +122,10 @@ const main = () => {
     }
 
     if (btnClick.name === "editar" || btnClick.name === "guardar") {
-      edit(parseInt(btnClick.value));
+      editTask(parseInt(btnClick.value));
     }
     if (btnClick.name === "eliminar") {
-      remove(parseInt(btnClick.value));
+      removeTask(parseInt(btnClick.value));
     }
   });
 };
