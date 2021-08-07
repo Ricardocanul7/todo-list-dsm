@@ -56,7 +56,6 @@ class TaskList {
     );
 
     this.autoincrementId++;
-    console.log(this.items);
     this.update();
   }
 
@@ -74,16 +73,11 @@ class TaskList {
 
   delete(object_id) {
     /* code */
-   console.log(object_id)
-
-    this.items = this.items.filter((i) => i.id!==object_id); // filtramos
-
-    console.log(this.items);
+    this.items = this.items.filter((i) => i.id !== object_id);
     this.update();
   }
 
   search(nameEnter) {
-    console.log("TaskList.js", nameEnter);
     const filtrado = this.items.filter(
       (element) => element.name.toLowerCase().indexOf(nameEnter) > -1
     );

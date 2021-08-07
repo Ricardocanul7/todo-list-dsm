@@ -22,15 +22,14 @@ const addTask = () => {
 
 const Edit = (parametro) => {
 
-  const Indice=parametro-1;
+  const Indice = parametro - 1;
 
   const btnEdit = document.querySelector(`.btn-edit[value="${parametro}"]`); //botn de edicion
   const btnSave = document.querySelector(`.btn-save[value="${parametro}"]`); //btnSave de guardado
   const inputEdit = document.querySelector(`.input-invisible[name="${parametro}"]`); //input de edicion
   const task = document.querySelector(`.nombre[value="${parametro}"]`);
   const Date = document.querySelector(`.ml-3.mr-3[value="${parametro}"]`);
- 
-  console.log(btnEdit)
+
   if (btnEdit) {
     btnEdit.classList.toggle("input-invisible");
     btnSave.classList.toggle("visible");
@@ -56,11 +55,8 @@ const Edit = (parametro) => {
   }
 };
 
-const Delete =(parametro)=>{
-
-  console.log(parametro)
-  taskList.delete(parseFloat(parametro))
-
+const Delete = (parametro) => {
+  taskList.delete(parseFloat(parametro));
 }
 
 const search = () => {
@@ -72,8 +68,7 @@ const search = () => {
     element.value = "";
     element.placeholder = "Task Name";
     element.parentElement.classList.remove('validate');
-    taskList.search(nameEnter)
-    console.log('main.js', nameEnter);
+    taskList.search(nameEnter);
     getBtnBack.innerHTML = '<i class="fas fa-arrow-left" style="margin-right: 10px;"></i>'
 
   } else {
@@ -112,15 +107,14 @@ const main = () => {
     getBtnBack.innerHTML = ''
   })
 
-  
+
   document.getElementById("task-list").addEventListener("click", (e) => {
     var btnSave = e.target.parentNode;
     // ...
 
-    if(btnSave.name==="editar"||btnSave.name==="guardar"){
-      console.log(btnSave.value)
+    if (btnSave.name === "editar" || btnSave.name === "guardar") {
       Edit(parseFloat(btnSave.value));
-      
+
     }
   });
 
@@ -128,12 +122,12 @@ const main = () => {
     var btnDelete = e.target.parentNode;
     // ...
 
-    if(btnDelete.name==="eliminar"){
+    if (btnDelete.name === "eliminar") {
       Delete(parseFloat(btnDelete.value));
     }
   });
 
- 
+
 };
 
 // Initialize script
