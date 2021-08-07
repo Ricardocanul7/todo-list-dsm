@@ -1,35 +1,47 @@
 import Task from "./Task.js";
 class TaskList {
-  constructor(element_id, items) {
+  constructor(element_id) {
     this.element_id = element_id;
     /* items<Task> */
-    this.items = items;
+    this.items = [];
     this.autoincrementId = 1;
 
     this.update();
   }
 
-  update() {
+  update(optional_list = null) {
     let listElement = document.getElementById(this.element_id);
-
     listElement.innerHTML = "";
     let rawTextNodes = "";
 
-    this.items.forEach((element) => {
-      rawTextNodes += `
-            <div data-id="${element.id}" >
-            <input type='text' class='form-control input-invisible' name="${element.id}"></input>
-                <p class='nombre' value="${element.id}" >${element.name}</p>
-                <small class="ml-3 mr-3" value="${element.id}">
-                    ${element.date}
-                </small>
-               
-                <button class="btn-edit" value="${element.id}" name="editar"><i class="fas fa-edit"></i></button>
-                <button class="btn-save" value="${element.id}" name="guardar"><i class="fas fa-save"></i></button>
-                <button class="btn btn-danger " value="${element.id}" name="eliminar"><i class="fas fa-trash-alt"></i></button>
-            </div>
-            `;
-    });
+    let mainList = [];
+    if (optional_list !== null) {
+      mainList = [...optional_list];
+    }
+    else {
+      mainList = [...this.items];
+    }
+
+    if (mainList.length === 0) {
+      rawTextNodes = "No se encontró ningún resultado";
+    } else {
+      mainList.forEach((element) => {
+        rawTextNodes += `
+              <div data-id="${element.id}" >
+              <input type='text' class='form-control input-invisible' name="${element.id}"></input>
+                  <p class='nombre' value="${element.id}" >${element.name}</p>
+                  <small class="ml-3 mr-3" value="${element.id}">
+                      ${element.date}
+                  </small>
+                 
+                  <button class="btn-edit" value="${element.id}" name="editar"><i class="fas fa-edit"></i></button>
+                  <button class="btn-save" value="${element.id}" name="guardar"><i class="fas fa-save"></i></button>
+                  <button class="btn btn-danger " value="${element.id}" name="eliminar"><i class="fas fa-trash-alt"></i></button>
+              </div>
+              `;
+      });
+    }
+
 
     listElement.innerHTML = rawTextNodes;
   }
@@ -77,37 +89,13 @@ class TaskList {
     this.update();
   }
 
-  search(nameEnter) {
+  search(name) {
     const filtrado = this.items.filter(
-      (element) => element.name.toLowerCase().indexOf(nameEnter) > -1
+      (item) => (item.name.toLowerCase().indexOf(name.toLowerCase()) > -1)
     );
 
     if (filtrado !== null) {
-      let listElement = document.getElementById(this.element_id);
-      listElement.innerHTML = "";
-      let rawTextNodes = "";
-
-      if (filtrado.length === 0) {
-        rawTextNodes += "No se encontró ningún resultado";
-      } else {
-        filtrado.forEach((element) => {
-          rawTextNodes += `
-          <div data-id="${element.id}" >
-          <input type='text' class='form-control input-invisible' name="${element.id}"></input>
-              <p class='nombre' value="${element.id}" >${element.name}</p>
-              <small class="ml-3 mr-3" value="${element.id}">
-                  ${element.date}
-              </small>
-             
-              <button class="btn-edit" value="${element.id}" name="editar"><i class="fas fa-edit"></i></button>
-              <button class="btn-save" value="${element.id}" name="guardar"><i class="fas fa-save"></i></button>
-              <button class="btn btn-danger " value="${element.id}" name="eliminar"><i class="fas fa-trash-alt"></i></button>
-          </div>
-          `;
-        });
-      }
-
-      listElement.innerHTML = rawTextNodes;
+      this.update(filtrado);
     } else {
       this.update();
     }

@@ -1,7 +1,15 @@
 import Task from "./Task.js";
 import TaskList from "./TaskList.js";
 
-const taskList = new TaskList("task-list", []);
+const taskList = new TaskList("task-list");
+
+/* Remove when program gets ready to merge */
+/* Only data to test */
+taskList.add(new Task(null, "Hola Mundo", null));
+taskList.add(new Task(null, "Hola guey", null));
+taskList.add(new Task(null, "test", null));
+taskList.add(new Task(null, "Que onda", null));
+/* Only data to test */
 
 const addTask = () => {
   let inputElement = document.getElementById("task-name"); //el input que guarda el nombre
