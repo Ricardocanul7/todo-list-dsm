@@ -28,15 +28,12 @@ const addTask = () => {
   }
 };
 
-const Edit = (parametro) => {
-
-  const Indice = parametro - 1;
-
-  const btnEdit = document.querySelector(`.btn-edit[value="${parametro}"]`); //botn de edicion
-  const btnSave = document.querySelector(`.btn-save[value="${parametro}"]`); //btnSave de guardado
-  const inputEdit = document.querySelector(`.input-invisible[name="${parametro}"]`); //input de edicion
-  const task = document.querySelector(`.nombre[value="${parametro}"]`);
-  const Date = document.querySelector(`.ml-3.mr-3[value="${parametro}"]`);
+const edit = (id) => {
+  const btnEdit = document.querySelector(`.btn-edit[value="${id}"]`);
+  const btnSave = document.querySelector(`.btn-save[value="${id}"]`);
+  const inputEdit = document.querySelector(`.input-invisible[name="${id}"]`);
+  const task = document.querySelector(`.nombre[value="${id}"]`);
+  const date = document.querySelector(`.ml-3.mr-3[value="${id}"]`);
 
   if (btnEdit) {
     btnEdit.classList.toggle("input-invisible");
@@ -56,32 +53,35 @@ const Edit = (parametro) => {
   }
 
   if (inputEdit) {
-    const object = { id: parseFloat(parametro), name: inputEdit.value, date: Date.textContent.trim() };
+    const object = new Task(
+      parseInt(id),
+      inputEdit.value,
+      date.textContent.trim()
+    );
     if (inputEdit.value !== "") {
-      taskList.edit(parseFloat(parametro), object);
+      taskList.edit(parseInt(id), object);
     }
   }
 };
 
-const Delete = (parametro) => {
-  taskList.delete(parseFloat(parametro));
+const remove = (item_id) => {
+  taskList.delete(parseInt(item_id));
 }
 
 const search = () => {
-  let element = document.getElementById('text-search');
-  let nameEnter = element.value.toLowerCase();
+  let searchInput = document.getElementById('text-search');
   let getBtnBack = document.getElementById('btn-back');
 
-  if (nameEnter !== '') {
-    element.value = "";
-    element.placeholder = "Task Name";
-    element.parentElement.classList.remove('validate');
-    taskList.search(nameEnter);
+  if (searchInput.value !== '') {
+    searchInput.value = "";
+    searchInput.placeholder = "Task Name";
+    searchInput.parentElement.classList.remove('validate');
+    taskList.search(searchInput.value);
     getBtnBack.innerHTML = '<i class="fas fa-arrow-left" style="margin-right: 10px;"></i>'
 
   } else {
-    element.parentElement.classList.add('validate');
-    element.placeholder = "Not empty";
+    searchInput.parentElement.classList.add('validate');
+    searchInput.placeholder = "Not empty";
   }
 }
 
@@ -117,25 +117,18 @@ const main = () => {
 
 
   document.getElementById("task-list").addEventListener("click", (e) => {
-    var btnSave = e.target.parentNode;
-    // ...
+    var btnClick = e.target;
+    if(btnClick.value === undefined){
+      btnClick = e.target.parentNode;
+    }
 
-    if (btnSave.name === "editar" || btnSave.name === "guardar") {
-      Edit(parseFloat(btnSave.value));
-
+    if (btnClick.name === "editar" || btnClick.name === "guardar") {
+      edit(parseInt(btnClick.value));
+    }
+    if (btnClick.name === "eliminar") {
+      remove(parseInt(btnClick.value));
     }
   });
-
-  document.getElementById("task-list").addEventListener("click", (e) => {
-    var btnDelete = e.target.parentNode;
-    // ...
-
-    if (btnDelete.name === "eliminar") {
-      Delete(parseFloat(btnDelete.value));
-    }
-  });
-
-
 };
 
 // Initialize script
