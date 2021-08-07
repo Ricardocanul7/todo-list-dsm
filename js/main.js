@@ -12,13 +12,13 @@ taskList.add(new Task(null, "Que onda", null));
 /* Only data to test */
 
 const addTask = () => {
-  let inputElement = document.getElementById("task-name"); //el input que guarda el nombre
-  let element = inputElement.value; //guarda el valor del input
+  let inputElement = document.getElementById("task-name");
+  let element = inputElement.value;
 
   if (element !== "") {
     let name = element.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     let task = new Task(null, name, null);
-    taskList.add(task); //manda como parametro al metodo add el nombre de la tarea
+    taskList.add(task);
     inputElement.value = "";
     inputElement.placeholder = "Task Name";
     inputElement.parentElement.classList.remove("valvalueate");

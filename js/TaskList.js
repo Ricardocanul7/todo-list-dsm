@@ -2,8 +2,7 @@ import Task from "./Task.js";
 class TaskList {
   constructor(element_id) {
     this.element_id = element_id;
-    /* items<Task> */
-    this.items = [];
+    this.items = [];  /* items<Task> */
     this.autoincrementId = 1;
 
     this.update();
@@ -46,9 +45,7 @@ class TaskList {
     listElement.innerHTML = rawTextNodes;
   }
 
-  //add recibe el nombre de la tarea como parametro
   add(task) {
-    /* Metodo add se encarga unicamente de guardar datos */
     let date = new Date();
     let hour = ("0" + date.getHours()).slice(-2);
     let minute = ("0" + date.getMinutes()).slice(-2);
@@ -56,7 +53,6 @@ class TaskList {
     let month = ("0" + (date.getMonth() + 1)).slice(-2);
     let year = date.getFullYear();
 
-    //agrega al array los datos del constructor
     this.items.push(
       new Task(
         this.autoincrementId,
@@ -84,7 +80,6 @@ class TaskList {
   }
 
   delete(object_id) {
-    /* code */
     this.items = this.items.filter((i) => i.id !== object_id);
     this.update();
   }
