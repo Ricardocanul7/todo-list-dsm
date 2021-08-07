@@ -41,7 +41,6 @@ class TaskList {
       });
     }
 
-
     listElement.innerHTML = rawTextNodes;
   }
 

@@ -73,12 +73,11 @@ const search = () => {
   let getBtnBack = document.getElementById('btn-back');
 
   if (searchInput.value !== '') {
+    taskList.search(searchInput.value);
     searchInput.value = "";
     searchInput.placeholder = "Task Name";
     searchInput.parentElement.classList.remove('validate');
-    taskList.search(searchInput.value);
     getBtnBack.innerHTML = '<i class="fas fa-arrow-left" style="margin-right: 10px;"></i>'
-
   } else {
     searchInput.parentElement.classList.add('validate');
     searchInput.placeholder = "Not empty";
@@ -100,7 +99,7 @@ const main = () => {
   });
 
   document.getElementById('search-task').addEventListener('click', () => {
-    search()
+    search();
   })
 
   document.getElementById('text-search').addEventListener('keyup', () => {
