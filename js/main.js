@@ -1,16 +1,16 @@
 import Task from "./Task.js";
 import TaskList from "./TaskList.js";
 
-const taskList = new TaskList("task-list", []);
+const taskList = new TaskList("task-list");
 
 const addTask = () => {
-  let inputElement = document.getElementById("task-name"); //el input que guarda el nombre
-  let element = inputElement.value; //guarda el valor del input
+  let inputElement = document.getElementById("task-name");
+  let element = inputElement.value;
 
   if (element !== "") {
     let name = element.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     let task = new Task(null, name, null);
-    taskList.add(task); //manda como parametro al metodo add el nombre de la tarea
+    taskList.add(task);
     inputElement.value = "";
     inputElement.placeholder = "Task Name";
     inputElement.parentElement.classList.remove("valvalueate");
@@ -20,17 +20,13 @@ const addTask = () => {
   }
 };
 
-const Edit = (parametro) => {
+const editTask = (id) => {
+  const btnEdit = document.querySelector(`.btn-edit[value="${id}"]`);
+  const btnSave = document.querySelector(`.btn-save[value="${id}"]`);
+  const inputEdit = document.querySelector(`.input-invisible[name="${id}"]`);
+  const task = document.querySelector(`.nombre[value="${id}"]`);
+  const date = document.querySelector(`.ml-3.mr-3[value="${id}"]`);
 
-  const Indice=parametro-1;
-
-  const btnEdit = document.querySelector(`.btn-edit[value="${parametro}"]`); //botn de edicion
-  const btnSave = document.querySelector(`.btn-save[value="${parametro}"]`); //btnSave de guardado
-  const inputEdit = document.querySelector(`.input-invisible[name="${parametro}"]`); //input de edicion
-  const task = document.querySelector(`.nombre[value="${parametro}"]`);
-  const Date = document.querySelector(`.ml-3.mr-3[value="${parametro}"]`);
- 
-  console.log(btnEdit)
   if (btnEdit) {
     btnEdit.classList.toggle("input-invisible");
     btnSave.classList.toggle("visible");
@@ -49,36 +45,34 @@ const Edit = (parametro) => {
   }
 
   if (inputEdit) {
-    const object = { id: parseFloat(parametro), name: inputEdit.value, date: Date.textContent.trim() };
+    const object = new Task(
+      parseInt(id),
+      inputEdit.value,
+      date.textContent.trim()
+    );
     if (inputEdit.value !== "") {
-      taskList.edit(parseFloat(parametro), object);
+      taskList.edit(parseInt(id), object);
     }
   }
 };
 
-const Delete =(parametro)=>{
-
-  console.log(parametro)
-  taskList.delete(parseFloat(parametro))
-
+const removeTask = (item_id) => {
+  taskList.delete(parseInt(item_id));
 }
 
-const search = () => {
-  let element = document.getElementById('text-search');
-  let nameEnter = element.value.toLowerCase();
+const searchTask = () => {
+  let searchInput = document.getElementById('text-search');
   let getBtnBack = document.getElementById('btn-back');
 
-  if (nameEnter !== '') {
-    element.value = "";
-    element.placeholder = "Task Name";
-    element.parentElement.classList.remove('validate');
-    taskList.search(nameEnter)
-    console.log('main.js', nameEnter);
+  if (searchInput.value !== '') {
+    taskList.search(searchInput.value);
+    searchInput.value = "";
+    searchInput.placeholder = "Task Name";
+    searchInput.parentElement.classList.remove('validate');
     getBtnBack.innerHTML = '<i class="fas fa-arrow-left" style="margin-right: 10px;"></i>'
-
   } else {
-    element.parentElement.classList.add('validate');
-    element.placeholder = "Not empty";
+    searchInput.parentElement.classList.add('validate');
+    searchInput.placeholder = "Not empty";
   }
 }
 
@@ -97,12 +91,12 @@ const main = () => {
   });
 
   document.getElementById('search-task').addEventListener('click', () => {
-    search()
+    searchTask();
   })
 
   document.getElementById('text-search').addEventListener('keyup', () => {
     if (event.key === 'Enter') {
-      search();
+      searchTask();
     }
   });
 
@@ -112,28 +106,20 @@ const main = () => {
     getBtnBack.innerHTML = ''
   })
 
-  
-  document.getElementById("task-list").addEventListener("click", (e) => {
-    var btnSave = e.target.parentNode;
-    // ...
-
-    if(btnSave.name==="editar"||btnSave.name==="guardar"){
-      console.log(btnSave.value)
-      Edit(parseFloat(btnSave.value));
-      
-    }
-  });
 
   document.getElementById("task-list").addEventListener("click", (e) => {
-    var btnDelete = e.target.parentNode;
-    // ...
+    var btnClick = e.target;
+    if(btnClick.value === undefined){
+      btnClick = e.target.parentNode;
+    }
 
-    if(btnDelete.name==="eliminar"){
-      Delete(parseFloat(btnDelete.value));
+    if (btnClick.name === "editar" || btnClick.name === "guardar") {
+      editTask(parseInt(btnClick.value));
+    }
+    if (btnClick.name === "eliminar") {
+      removeTask(parseInt(btnClick.value));
     }
   });
-
- 
 };
 
 // Initialize script
